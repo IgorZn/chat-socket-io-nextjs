@@ -2,9 +2,9 @@ import React from 'react'
 import { UserType } from '@/interfaces/'
 import { Button, Divider, Drawer } from 'antd'
 import { useClerk } from '@clerk/nextjs'
+import { useSelector } from 'react-redux'
 
 function CurrentUserInfo({
-	currentUser,
 	showCurrentUserInfo,
 	setShowCurrentUserInfo,
 }: {
@@ -12,6 +12,9 @@ function CurrentUserInfo({
 	showCurrentUserInfo: boolean
 	setShowCurrentUserInfo: React.Dispatch<React.SetStateAction<boolean>>
 }) {
+	const { currentUserData }: string = useSelector(state => state.user)
+	const currentUser = { ...currentUserData }
+
 	const clerk = useClerk()
 	const getProperty = (key: string, value: string) => {
 		return (

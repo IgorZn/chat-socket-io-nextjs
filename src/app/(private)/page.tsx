@@ -7,10 +7,10 @@ import { getCurrentUser } from '@/srv-actions/users'
 export default async function Home() {
 	const { userId } = await auth()
 	await dbConnect().then(() => console.log('Connected to MongoDB (cached)'))
-	const userData = await getCurrentUser()
+	// const userData = await getCurrentUser()
 
 	// console.log(userId)
-	console.log('currentUser>>>', userData)
+	// console.log('currentUser>>>', userData)
 	return (
 		<div className={'mt-5 mx-2'}>
 			{userId ? (

@@ -10,9 +10,13 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.0",
+    "@reduxjs/toolkit": "2.5.0",
+    "firebase": "11.1.0",
     "next": "14.2.17",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-redux": "9.2.0",
+    "redux": "5.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",

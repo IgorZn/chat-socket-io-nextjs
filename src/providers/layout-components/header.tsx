@@ -5,22 +5,29 @@ import { userLookupDb } from '@/srv-actions/userLookup'
 import { UserType } from '@/interfaces'
 import CurrentUserInfo from '@/providers/layout-components/current-user-info'
 import { Spin } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import { UserState } from '@/redux/store'
+import { SetCurrentUser } from '@/redux/userSlice'
 
 function Header(props) {
+	const { currentUserData }: UserState = useSelector(state => state.user)
+	const dispatch = useDispatch()
+
 	const [user, setUser] = React.useState<UserType>(null)
 	const [showCurrentUserInfo, setShowCurrentUserInfo] = React.useState(false)
 
 	const { isLoaded, userId, sessionId, getToken } = useAuth()
 	const { isLoaded: isUserLoaded, isSignedIn, user: currentUser } = useUser()
-	console.log('useAuth>>>', isLoaded, userId, sessionId)
-	console.log('useUser>>>', isUserLoaded, isSignedIn, currentUser)
-	console.log('user>>>', user)
+	// console.log('useAuth>>>', isLoaded, userId, sessionId)
+	// console.log('useUser>>>', isUserLoaded, isSignedIn, currentUser)
+	// console.log('currentUserData>>>', currentUserData)
 
 	useEffect(() => {
 		const fetchUser = async () => {
 			if (userId) {
-				const userData = await userLookupDb(userId)
+				const userData: string | null = await userLookupDb(userId)
 				if (typeof userData === 'string') {
+					dispatch(SetCurrentUser(JSON.parse(userData)))
 					setUser(JSON.parse(userData))
 				}
 			}
