@@ -15,6 +15,7 @@ function CurrentUserInfo({
 	const { currentUserData }: string = useSelector(state => state.user)
 	const currentUser = { ...currentUserData }
 
+	const [file, setFile] = React.useState(null)
 	const clerk = useClerk()
 	const getProperty = (key: string, value: string) => {
 		return (
